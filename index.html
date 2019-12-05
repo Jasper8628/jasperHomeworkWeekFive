@@ -61,6 +61,7 @@
         indexArray.push(entry);
         createRow.addClass("input");
         createRow.attr("contenteditable", "true");
+        createRow.attr("style","margin:10px");
         var textValue=localStorage.getItem(entry);
         console.log(textValue);
         createRow.text(textValue);
