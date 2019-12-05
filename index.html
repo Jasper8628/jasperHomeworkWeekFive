@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h2>Basic Table</h2>
+    <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+    <table class="table table-responsive-md table-striped text-center">
+      <thead>
+        <tr>
+          <!-- The scope attribute specifies that this is a header for a column -->
+          <th contenteditable="true" scope="col">Movie Name</th>
+          <th contenteditable="true" scope="col">Year</th>
+          <th contenteditable="true" scope="col">Actors</th>
+        </tr>
+      </thead>
+      <tbody id="here">
+        <tr>
+          <td>Interstellar</td>
+          <td>2014</td>
+          <td>Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow</td>
+        </tr>
+        <!-- Insert additional movie rows here -->
+      </tbody>
+      <tbody>
+        <tr id="day-planner">
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+
+    // The below code fills in the first row of the table
+    $(document).ready(function () {
+      var numRow = 8;
+      var userInput;
+      var indexArray=[];
+      for (i = 0; i < numRow; i++) {
+        var createRow = $('<li>');
+        var createButton = $('<button>');
+        createRow.addClass(i+numRow+"-o-clock");
+        var entry = createRow.attr("Class");
+        indexArray.push(entry);
+        createRow.addClass("input");
+        createRow.attr("contenteditable", "true");
+        var textValue=localStorage.getItem(entry);
+        console.log(textValue);
+        createRow.text(textValue);
+        createButton.addClass("save");
+        createButton.attr("value", i);
+        createButton.text("save");
+        $("#day-planner").append(createRow);
+        $("#day-planner").append(createButton);
+
+      }
+      $(".save").on("click", function () {
+        var index = $(this).attr("value");
+        userInput=$("."+indexArray[index]).text();
+        localStorage.setItem(indexArray[index],userInput);
+        console.log(index);
+        console.log(userInput);
+        var value=indexArray[index];
+        console.log(value);
+        console.log(localStorage.getItem(value));
+        console.log(localStorage);
+
+        
+
+
+      });
+
+
+
+
+
+    });
+
+
+    // Repeat the above logic to add rows for two more movies of your choice
+
+    // BONUS: Once complete, try to make your code as DRY as possible through the use of functions
+  </script>
+</body>
+
+</html>
