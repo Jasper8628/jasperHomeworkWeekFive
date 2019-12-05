@@ -36,11 +36,11 @@
     </table>
         <div class="container">
          <div class="row" style="background-color:grey">
-          <div id="day-planner" class="col-md-11 col-sm-11 col-xs-11">
+          <div id="day-planner" class="col-md-12 col-sm-12 col-xs-12">
            
           </div>
-          <div id="save" class="col-md-1 col-sm-1 col-xs-1">
-          </div>
+          //<div id="save" class="col-md-1 col-sm-1 col-xs-1">
+          //</div>
          </div>
         </div>
   </div>
@@ -54,6 +54,7 @@
       var userInput;
       var indexArray=[];
       for (i = 0; i < numRow; i++) {
+        var createTR = $('<tr>');
         var createRow = $('<li>');
         var createButton = $('<button>');
         createRow.addClass(i+numRow+"-o-clock");
@@ -69,8 +70,9 @@
         createButton.addClass("save");
         createButton.attr("value", i);
         createButton.text("save");
-        $("#day-planner").append(createRow);
-        $("#save").append(createButton);
+        $("#day-planner").append(createTR);
+        createTR.append.(createRow);
+        createTR.append(createButton);
 
       }
       $(".save").on("click", function () {
