@@ -36,10 +36,10 @@
     </table>
         <div class="container">
          <div class="row" style="background-color:grey">
-          <div class="col-md-11 col-sm-11 col-xs-11">
-           <div id="day-planner">
-
-           </div>
+          <div id="day-planner" class="col-md-11 col-sm-11 col-xs-11">
+           
+          </div>
+          <div id="save" class="col-md-1 col-sm-1 col-xs-1">
           </div>
          </div>
         </div>
@@ -70,7 +70,7 @@
         createButton.attr("value", i);
         createButton.text("save");
         $("#day-planner").append(createRow);
-        $("#day-planner").append(createButton);
+        $("#save").append(createButton);
 
       }
       $(".save").on("click", function () {
