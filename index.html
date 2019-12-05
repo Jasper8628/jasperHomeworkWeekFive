@@ -39,7 +39,9 @@
           <div  class="col-md-12 col-sm-12 col-xs-12">
            <table>
             <thead>
-             <th>day planner
+             <th>Time
+             </th>
+             <th>Activity
              </th>
             </thead>
             <tbody id="day-planner">
@@ -65,10 +67,12 @@
       for (i = 0; i < numRow; i++) {
         var createTR = $('<tr>');
         var createRow = $('<li>');
+        var createTD = $('<td>');
         var createButton = $('<button>');
         createRow.addClass(i+numRow+"-o-clock");
         var entry = createRow.attr("Class");
         indexArray.push(entry);
+        createTD.text(entry);
         createRow.addClass("input");
         createRow.attr("contenteditable", "true");
         createRow.attr("style","margin:10px");
@@ -80,6 +84,7 @@
         createButton.attr("value", i);
         createButton.text("save");
         $("#day-planner").append(createTR);
+        createTR.append(createTD);
         createTR.append(createRow);
         createTR.append(createButton);
 
