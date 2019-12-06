@@ -44,6 +44,7 @@
               </th>
               <th>Activity
               </th>
+              <th></th>
 
              </tr>
              
@@ -72,6 +73,7 @@
         var createTR = $('<tr>');
         var createRow = $('<li>');
         var createTD = $('<td>');
+        var createTB = $('<td>');
         var createButton = $('<button>');
         createRow.addClass(i+numRow+"-o-clock");
         var entry = createRow.attr("Class");
@@ -90,7 +92,8 @@
         $("#day-planner").append(createTR);
         createTR.append(createTD);
         createTR.append(createRow);
-        createTR.append(createButton);
+        createTR.append(createTB);
+        createTB.append(createButton);
 
       }
       $(".save").on("click", function () {
