@@ -115,7 +115,7 @@
           $("#currentTime").text(h + ":" + m + ":" + s);
         }
         setInterval(displayTime, 1000);
-        var d = new Date();
+        
         var week = new Array(7);
         week[0] = "Sunday";
         week[1] = "Monday";
@@ -125,7 +125,7 @@
         week[5] = "Friday";
         week[6] = "Saturday";
 
-        var weekday = week[d.getDay()];
+        var weekday = week[today.getDay()];
         $("#currentDay").text(weekday);
         $("#currentDate").text(date);
         $("#currentTime").text(time + ":" + minute);
