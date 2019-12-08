@@ -20,8 +20,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active mr-sm-3" id="currentDay">
         </li>
-        <li class="nav-item mr-sm-3" id="currentTime">
-
+        <li class="nav-item mr-sm-3">
         </li>
         <li class="nav-item dropdown ">Start Time:
           <select name="Start Time" class="start-time">
@@ -68,10 +67,12 @@
   <div class="jumbotron">
 
     <h1 class="display-3">Work Day Scheduler</h1>
-    <p class="lead">Have a nice and productive day!</p>
+    <h3 class="lead">Have a nice and productive day!</h3>
+    <p id="currentDate"></p>
+    <p id="currentTime"></p>
   </div>
   <!-- <p id="currentDay" class="lead"></p>
-  <p id="currentTime"></p>
+  
 </header> -->
 
   <body>
@@ -114,7 +115,19 @@
           $("#currentTime").text(h + ":" + m + ":" + s);
         }
         setInterval(displayTime, 1000);
-        $("#currentDay").text(date);
+        var d = new Date();
+        var week = new Array(7);
+        week[0] = "Sunday";
+        week[1] = "Monday";
+        week[2] = "Tuesday";
+        week[3] = "Wednesday";
+        week[4] = "Thursday";
+        week[5] = "Friday";
+        week[6] = "Saturday";
+
+        var weekday = week[d.getDay()];
+        $("#currentDay").text(weekday);
+        $("#currentDate").text(date);
         $("#currentTime").text(time + ":" + minute);
 
         var userInput;
