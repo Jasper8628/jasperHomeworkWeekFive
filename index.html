@@ -67,7 +67,7 @@
   <div class="jumbotron">
 
     <h1 class="display-3">Work Day Scheduler</h1>
-    <h3 class="lead">Have a nice and productive day!</h3>
+    <h3 class="currentDay"></h3>
     <p id="currentDate"></p>
     <p id="currentTime"></p>
   </div>
@@ -126,7 +126,7 @@
         week[6] = "Saturday";
 
         var weekday = week[today.getDay()];
-        $("#currentDay").text(weekday);
+        $(".currentDay").text(weekday);
         $("#currentDate").text(date);
         $("#currentTime").text(time + ":" + minute);
 
