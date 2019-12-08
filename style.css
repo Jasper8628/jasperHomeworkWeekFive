@@ -1,0 +1,10 @@
+body{
+  background-image:url("circle-blues.png");
+}
+.jumbotron{
+  background-image:url("trees.png");
+}
+
+.navbar{
+  background-color: teal;
+}

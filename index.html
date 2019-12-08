@@ -3,127 +3,240 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Favorite Movies</title>
+  <title>Day Planner</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
 </head>
 
-<body>
-  <div class="container">
-    <h2>Basic Table</h2>
-    <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
-    <table class="table table-responsive-md table-striped text-center">
-      <thead>
-        <tr>
-          <!-- The scope attribute specifies that this is a header for a column -->
-          <th contenteditable="true" scope="col">Movie Name</th>
-          <th contenteditable="true" scope="col">Year</th>
-          <th contenteditable="true" scope="col">Actors</th>
-        </tr>
-      </thead>
-      <tbody id="here">
-        <tr>
-          <td>Interstellar</td>
-          <td>2014</td>
-          <td>Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow</td>
-        </tr>
-        <!-- Insert additional movie rows here -->
-      </tbody>
-      <tbody>
-        
-        
+<header>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-blue">
+    <a class="navbar-brand" href="#">Day Planner</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      </tbody>
-    </table>
-        <div class="container">
-         <div class="row" style="background-color:grey">
-          <div  class="col-md-12 col-sm-12 col-xs-12">
-           <table>
-            <thead>
-             <tr>
-              <th>Time
-              </th>
-              <th>Activity
-              </th>
-              <th>save
-              </th>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active mr-sm-3" id="currentDay">
+        </li>
+        <li class="nav-item mr-sm-3" id="currentTime">
 
-             </tr>
-             
-            </thead>
-            <tbody id="day-planner">
-             
-            </tbody>
-           </table>
-           
+        </li>
+        <li class="nav-item dropdown ">Start Time:
+          <select name="Start Time" class="start-time">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </li>
+        <li>
+          <select name="AM/PM mr-sm-2" class="am-pm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </li>
+        <li class="nav-item dropdown mr-sm-1">Work Hours:
+          <select name="Work Hours" class="work-hours">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </li>
+        <button class="nav-item btn-xs" id="go">Go
+
+        </button>
+      </ul>
+    </div>
+  </nav>
+  <div class="jumbotron">
+
+    <h1 class="display-3">Work Day Scheduler</h1>
+    <p class="lead">Have a nice and productive day!</p>
+  </div>
+  <!-- <p id="currentDay" class="lead"></p>
+  <p id="currentTime"></p>
+</header> -->
+
+  <body>
+    <div class="container">
+      </table>
+      <div class="container">
+        <div class="row" style="background-color:#cccccc">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <table class="table table-hover table-bordered form-group">
+              <thead>
+                <tr>
+                  <th class="text-center">Time</th>
+                  <th class="col-md-10 text-center">Activity</th>
+                  <th>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="day-planner">
+              </tbody>
+            </table>
           </div>
           <div id="save" class="col-md-1 col-sm-1 col-xs-1">
           </div>
-         </div>
         </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      $(document).ready(function () {
+        var today = new Date();
+        var time = today.getHours();
+        var minute = today.getMinutes() + ":" + today.getSeconds();
+        var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+        function displayTime() {
+          var d = new Date();
+          var s = d.getSeconds();
+          var m = d.getMinutes();
+          var h = d.getHours();
+          $("#currentTime").text(h + ":" + m + ":" + s);
+        }
+        setInterval(displayTime, 1000);
+        $("#currentDay").text(date);
+        $("#currentTime").text(time + ":" + minute);
+
+        var userInput;
+        var indexArray = [];
+        var startTime = 6;
+        var numRow = 11;
+        var amPm = "AM";
+        renderTable();
+
+        $("select.start-time").change(function () {
+          var selected = $(this).children("option:selected").val();
+            startTime = parseInt(selected);
+          console.log(startTime);
+        });
+
+        $("select.am-pm").change(function () {
+          var selected = $(this).children("option:selected").val();
+         
+          amPm = selected;
+          
+          console.log(amPm);
+        });
+
+        $("select.work-hours").change(function () {
+          var selected = $(this).children("option:selected").val();
+          numRow = parseInt(selected);
+          console.log(numRow);
+        });
+        $("#go").on("click", function () {
+          console.log(amPm,startTime,numRow);
+          renderTable();
+        });
 
 
-    // The below code fills in the first row of the table
-    $(document).ready(function () {
-      var numRow = 8;
-      var userInput;
-      var indexArray=[];
-      for (i = 0; i < numRow; i++) {
-        var createTR = $('<tr>');
-        var createRow = $('<li>');
-        var createTD = $('<td>');
-        var createTB = $('<td>');
-        var createButton = $('<button>');
-        createRow.addClass(i+numRow+"-o-clock");
-        var entry = createRow.attr("Class");
-        indexArray.push(entry);
-        createTD.text(entry);
-        createRow.addClass("input");
-        createRow.attr("contenteditable", "true");
-        createRow.attr("style","margin:10px");
-        createRow.attr("style","background-color:teal");
-        var textValue=localStorage.getItem(entry);
-        console.log(textValue);
-        createRow.text(textValue);
-        createButton.addClass("save");
-        createButton.attr("value", i);
-        createButton.text("save");
-        $("#day-planner").append(createTR);
-        createTR.append(createTD);
-        createTR.append(createRow);
-        createTR.append(createTB);
-        createTB.append(createButton);
+        function renderTable() {
+          $("td").remove();
+          if(amPm=="AM" && startTime<12){
+            startTime=startTime;
+          }
+          else if(amPm=="AM"){
+            startTime=startTime-12;
+          }
+          else{
 
-      }
-      $(".save").on("click", function () {
-        var index = $(this).attr("value");
-        userInput=$("."+indexArray[index]).text();
-        localStorage.setItem(indexArray[index],userInput);
-        console.log(index);
-        console.log(userInput);
-        var value=indexArray[index];
-        console.log(value);
-        console.log(localStorage.getItem(value));
-        console.log(localStorage);
+            startTime=startTime+12;
+          }
+          
+          var timeSign;
+          var timeNewSign;
+          for (i = 0; i < numRow; i++) {
+            var createTR = $('<tr>');
+            var createRow = $('<td>');
+            var createTD = $('<td>');
+            var createTB = $('<td>');
+            var createButton = $('<button>');
 
-        
+            if (i + startTime > 12 && i + startTime < 24) {
+              timeSign = i + startTime - 12;
+              timeNewSign = timeSign + "PM";
+            }
+            else if (i + startTime >= 24) {
+              timeSign = i + startTime - 24;
+              timeNewSign = timeSign + "AM";
+            }
+            else {
+              timeSign = i + startTime;
+              timeNewSign = timeSign + "AM"
+            }
+            if (i + startTime < time) {
+              createTR.addClass("table-warning");
+              createRow.addClass("table-warning");
+            }
+            else if (i + startTime == time) {
+              createTR.addClass("table-success");
+              createRow.addClass("table-success");
+            }
+            else {
+              createTR.addClass("table-primary");
+              createRow.addClass("table-primary");
+            }
+            createRow.attr("id", timeNewSign);
+
+            var entry = createRow.attr("id");
+            indexArray.push(entry);
+            createTD.text(entry);
+            createRow.addClass("input");
+            createRow.attr("contenteditable", "true");
+            var textValue = localStorage.getItem(entry);
+            createRow.text(textValue);
+            createButton.addClass("save btn-sm btn-primary");
+            createButton.attr("value", i);
+            createButton.text("save");
+            $("#day-planner").append(createTR);
+            createTR.append(createTD);
+            createTR.append(createRow);
+            createTR.append(createTB);
+            createTB.append(createButton);
+          }
+
+        }
+
+        $(".save").on("click", function () {
+          var index = $(this).attr("value");
+          userInput = $("#" + indexArray[index]).text();
+          localStorage.setItem(indexArray[index], userInput);
+
+
+
+
+        });
+
+
+
 
 
       });
 
 
-
-
-
-    });
-
-
     // Repeat the above logic to add rows for two more movies of your choice
 
     // BONUS: Once complete, try to make your code as DRY as possible through the use of functions
-  </script>
-</body>
+    </script>
+  </body>
 
 </html>
